@@ -1,12 +1,10 @@
 import numpy as np
+import os
 
-import matplotlib as mpl
-import matplotlib.pyplot as plt
+def ensure_dir(path: str) -> None:
+    os.makedirs(path, exist_ok=True)
 
 from scipy.optimize import curve_fit
-
-%config InlineBackend.figure_format = 'svg'
-
 
 def mjd_to_phase (
 
@@ -22,8 +20,8 @@ def mjd_to_phase (
     discriminant = (P)**2 - 4*P_0*delta
 
     if np.any(discriminant < 0):
-        raise ValueError("Discriminant is less than 0 (negative), so 
-cannot take the square root.")
+        raise ValueError("Discriminant is less than 0 (negative), so no real roots exist.")
+
 
     square_root = np.sqrt(discriminant)
 
